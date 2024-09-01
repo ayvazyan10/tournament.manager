@@ -1,0 +1,31 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block title %}Турниры{% endblock %}
+
+{% block content %}
+    <h1>Турниры</h1>
+
+    <a href="{{ path('tournament_create') }}" class="btn btn-primary mb-3">Создать новый турнир</a>
+
+    {% if tournaments is empty %}
+        <p>Нет доступных турниров</p>
+    {% else %}
+        <ul class="list-group">
+            {% for tournament in tournaments %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <a href="{{ path('tournament_show', { 'slug': tournament.slug }) }}">
+                            {{ tournament.name }}
+                        </a>
+                    </div>
+                    <div>
+                        <form method="post" action="{{ path('tournament_delete', { 'id': tournament.id }) }}" onsubmit="return confirm('Вы уверены, что хотите удалить этот турнир?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tournament.id) }}">
+                            <button class="btn btn-danger btn-sm">Удалить</button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

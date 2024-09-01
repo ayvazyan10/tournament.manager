@@ -1,0 +1,24 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block title %}{{ team.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ team.name }}</h1>
+
+    <h2>Турниры</h2>
+    {% if team.tournaments is empty %}
+        <p>Эта команда не участвует ни в одном турнире.</p>
+    {% else %}
+        <ul class="list-group">
+            {% for tournament in team.tournaments %}
+                <li class="list-group-item">
+                    <a href="{{ path('tournament_show', { 'slug': tournament.slug }) }}">
+                        {{ tournament.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <a href="{{ path('team_index') }}" class="btn btn-secondary mt-3">Назад к списку команд</a>
+{% endblock %}

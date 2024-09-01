@@ -1,0 +1,32 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block title %}Текущие матчи{% endblock %}
+
+{% block content %}
+    <h1>Текущие матчи</h1>
+
+    {% if games is empty %}
+        <p>Нет предстоящих матчей</p>
+    {% else %}
+        <ul class="list-group">
+            {% for game in games %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>{{ game.tournament.name }}</strong>:
+                        {{ game.homeTeam.name }} vs {{ game.awayTeam.name }}
+                        - {{ game.date|date('Y-m-d H:i') }}
+                    </div>
+                    <div>
+                        {% if game.homeScore is not null and game.awayScore is not null %}
+                            <span class="badge badge-primary">
+                                {{ game.homeScore }} - {{ game.awayScore }}
+                            </span>
+                        {% else %}
+                            <span class="badge badge-warning">Матч не завершен</span>
+                        {% endif %}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

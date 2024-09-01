@@ -1,0 +1,22 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block title %}{{ tournament.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ tournament.name }}</h1>
+
+    <h2 class="mt-5">Матчи</h2>
+    {% if matches is empty %}
+        <p>Пока матчов нет.</p>
+    {% else %}
+        <ul class="list-group">
+            {% for game in matches %}
+                <li class="list-group-item">
+                    {{ game.homeTeam.name }} vs {{ game.awayTeam.name }} - {{ game.date|date('Y-m-d H:i') }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <a href="{{ path('tournament_index') }}" class="btn btn-secondary mt-3 mb-4">Назад к турнирам</a>
+{% endblock %}
