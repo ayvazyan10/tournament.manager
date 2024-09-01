@@ -14,5 +14,5 @@
 
 ### 🚀 Запуск fixtures для экономии времени (если необходимо конечно)
 ````
-docker-compose exec tournaments_symfony_app php bin/console doctrine:fixtures:load --no-interaction
+docker-compose exec app php bin/console doctrine:fixtures:load --no-interaction
 ````
