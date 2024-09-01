@@ -16,3 +16,5 @@
 ````
 docker-compose exec app php bin/console doctrine:fixtures:load --no-interaction
 ````
+- если при запуске fixtures возникнет ошибка, Fatal error: Uncaught LogicException: Symfony Runtime is missing.
+просто нужно подождать немного, пару секунд и повторить команду, проблема одна composer install в процессе выполнения.
