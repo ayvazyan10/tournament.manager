@@ -26,6 +26,12 @@ class GenerateMatchesAction
             return; //--> Не создаем игры, если недостаточно команд
         }
 
+        $isOdd = $totalTeams % 2 !== 0;
+        if ($isOdd) {
+            $teams[] = null; //--> команда без соперника в этом раунде
+            $totalTeams++;
+        }
+
         //--> Генерация игр по алгоритму кругового турнира
         for ($i = 0; $i < $totalTeams - 1; $i++) {
             for ($j = 0; $j < $totalTeams / 2; $j++) {
